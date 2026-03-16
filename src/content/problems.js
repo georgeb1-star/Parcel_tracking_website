@@ -1,0 +1,115 @@
+export const problemsContent = {
+  title: "Industry Problems",
+  subtitle: "Why a better solution is needed — in numbers",
+  intro: "The UK parcel industry is failing at scale. Behind the headline growth figures lies a crisis of reliability, transparency, and cost that is damaging retailers, carriers, consumers, and the environment in equal measure.",
+
+  statsBar: [
+    { value: "£1.6B", label: "Annual cost of failed deliveries to UK retail", color: "red" },
+    { value: "37%", label: "Consumers who had issues with their last delivery", color: "orange" },
+    { value: "356,000", label: "Tonnes of CO₂ wasted on failed delivery trips per year", color: "yellow" },
+    { value: "6%", label: "First-attempt delivery failure rate", color: "orange" },
+  ],
+
+  sections: [
+    {
+      id: "failure-crisis",
+      title: "The Delivery Failure Crisis",
+      icon: "📦",
+      color: "red",
+      stats: [
+        { value: "£1.6B", label: "Annual cost of failed deliveries to UK retail", color: "red" },
+        { value: "37%", label: "Had issues with their most recent delivery", color: "orange" },
+        { value: "47%", label: "Who had a problem also struggled to resolve it", color: "red" },
+        { value: "21%", label: "Of all support conversations are WISMO queries", color: "orange" },
+      ],
+      points: [
+        { icon: "⏱️", title: "Drivers leave too quickly", detail: "29% of failed deliveries attributed to drivers not allowing enough time before leaving" },
+        { icon: "📦", title: "Parcels left in unsafe places", detail: "24% of issues involve parcels left in locations vulnerable to theft or damage" },
+        { icon: "🕐", title: "Late deliveries", detail: "24% of delivery problems are straightforward lateness — failing the promised timeframe" },
+        { icon: "💬", title: "Support burden", detail: "'Where is my order?' accounts for ~21% of all customer support conversations, draining operational capacity" },
+      ],
+      narrative: "Failed deliveries cost UK retail approximately £1.6 billion annually. 37% of people faced issues with their most recent parcel delivery — and nearly half of those who encountered a problem had difficulty getting it resolved. The root causes are predictable, recurring, and largely preventable with the right technology.",
+    },
+    {
+      id: "tracking-gap",
+      title: "The Tracking Gap",
+      icon: "📡",
+      color: "blue",
+      stats: [
+        { value: "91%", label: "Customers who track their packages", color: "accent" },
+        { value: "88%", label: "Consider real-time tracking essential", color: "accent" },
+        { value: "6%", label: "Of businesses have full supply chain visibility", color: "red" },
+      ],
+      points: [
+        { icon: "📍", title: "Daily tracking checks", detail: "91% of customers track their packages — many checking multiple times per day" },
+        { icon: "✅", title: "Tracking is non-negotiable", detail: "88% of consumers consider real-time tracking essential for a good delivery experience" },
+        { icon: "🔍", title: "Visibility is nearly absent", detail: "Only 6% of logistics businesses report full supply chain visibility — a critical blind spot" },
+        { icon: "⬛", title: "Checkpoint-only systems", detail: "Current systems only scan at fixed checkpoints — there is no live location data between scans" },
+      ],
+      narrative: "Consumers have made their expectations clear: tracking isn't a premium feature, it's a baseline requirement. Yet the infrastructure to deliver it doesn't exist at scale. Current systems scan parcels at fixed points and guess at everything in between. The result is a tracking experience that tells you where a parcel was — never where it is.",
+    },
+    {
+      id: "cross-border",
+      title: "Cross-Border Complexity",
+      icon: "🌍",
+      color: "purple",
+      stats: [
+        { value: "73%", label: "Of product categories are tariff-sensitive", color: "purple" },
+        { value: "42%", label: "Of shipment value in high-complexity customs categories", color: "orange" },
+        { value: "39.2%", label: "Apparel/textiles requiring strict origin verification", color: "yellow" },
+      ],
+      breakdown: [
+        { category: "Apparel & Textiles", percentage: "39.2%", detail: "Strict origin verification required", severity: "high" },
+        { category: "Luxury & Personal Items", percentage: "16.8%", detail: "Stricter value declaration checks", severity: "high" },
+        { category: "Electronics", percentage: "10%", detail: "Regional restrictions and battery safety regulations", severity: "medium" },
+      ],
+      narrative: "Post-Brexit customs requirements have dramatically increased the compliance burden for cross-border shipments. 73% of product categories are now tariff-sensitive, and 42% of shipment value falls into high-complexity customs categories. For retailers selling internationally, this isn't a niche problem — it's the majority of their outbound volume.",
+    },
+    {
+      id: "cost-table",
+      title: "The Cost to Retailers",
+      icon: "💷",
+      color: "red",
+      subtitle: "Industry Cost by Event",
+      source: "Overall Industry Cost by Event",
+      table: {
+        headers: ["Scenario", "Consumer", "Retailer", "Carrier", "Total"],
+        rows: [
+          { scenario: "Failed 1st delivery – Re-arranged", consumer: "£2.22", retailer: "£4.70", carrier: "£4.81", total: "£11.73", highlight: false },
+          { scenario: "Failed 1st delivery – Collection by customer", consumer: "£5.38", retailer: "£0.00", carrier: "£2.45", total: "£7.83", highlight: false },
+          { scenario: "Late Delivery", consumer: "£2.22", retailer: "£94.54", carrier: "£0.00", total: "£96.76", highlight: false },
+          { scenario: "Failed Delivery / Lost Order / Cancellation", consumer: "£4.94", retailer: "£148.21", carrier: "£31.80", total: "£184.95", highlight: true },
+        ],
+        totals: { consumer: "£15", retailer: "£247", carrier: "£39", total: "£301" },
+      },
+      highlight: "Retailers bear £247 of the £301 total cost — 82% of the burden from delivery failures falls on those with the least control over the final mile.",
+      narrative: "The cost of delivery failure is not evenly distributed. Carriers absorb a fraction of the damage; retailers bear the overwhelming majority. Late deliveries and lost orders don't just cost money — they trigger refunds, emergency reshipping, customer service escalations, and long-term brand damage.",
+    },
+    {
+      id: "brand-damage",
+      title: "Brand Damage & Customer Trust",
+      icon: "⭐",
+      color: "orange",
+      points: [
+        { icon: "🔄", title: "Competitor switching", detail: "A single bad delivery experience is enough to push customers to competitors — permanently" },
+        { icon: "📣", title: "Social media amplification", detail: "Negative delivery experiences spread rapidly via social media, review platforms, and word of mouth" },
+        { icon: "💸", title: "Compounding operational costs", detail: "Each failed delivery triggers reshipping costs, refund processing, and customer service time" },
+        { icon: "📉", title: "Loyalty erosion", detail: "Customers who experience delivery failures are significantly less likely to reorder from the same retailer" },
+      ],
+      narrative: "Delivery failure isn't contained to the logistics team's KPI dashboard. It reverberates across the entire business: customer lifetime value drops, acquisition costs rise to replace churned customers, and operational costs compound with every reshipping cycle. The brand damage is often invisible in the moment but destructive over time.",
+    },
+    {
+      id: "environmental",
+      title: "Environmental Impact",
+      icon: "🌱",
+      color: "green",
+      stats: [
+        { value: "724,435", label: "Delivery vans on UK roads", color: "green" },
+        { value: "15B", label: "Miles driven by delivery vans annually", color: "yellow" },
+        { value: "921M", label: "Miles wasted on failed deliveries", color: "orange" },
+        { value: "356,000", label: "Tonnes of CO₂ from failed delivery trips", color: "red" },
+      ],
+      narrative: "724,435 delivery vans each travelling approximately 21,200 miles per year amounts to 15 billion miles on UK roads annually. At a 6% first-attempt failure rate, that's 921 million miles driven unnecessarily — producing an estimated 356,000 tonnes of CO₂ every year. Improving first-attempt delivery success isn't just a cost issue; it's a direct environmental intervention.",
+    },
+  ],
+};

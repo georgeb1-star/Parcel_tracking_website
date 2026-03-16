@@ -23,6 +23,7 @@ export default function Footer() {
               {[
                 { path: '/', label: 'Overview' },
                 { path: '/market', label: 'Market Landscape' },
+                { path: '/problems', label: 'Industry Problems' },
                 { path: '/technology', label: 'Technology Landscape' },
                 { path: '/competitors', label: 'Competitor Analysis' },
                 { path: '/recommendations', label: 'Recommendations' },

@@ -33,6 +33,7 @@ export default function Market() {
   const volumeSection = sections.find(s => s.id === 'volume');
   const consumerSection = sections.find(s => s.id === 'consumer');
   const retailerSection = sections.find(s => s.id === 'retailer');
+  const costSection = sections.find(s => s.id === 'cost-of-failure');
   const crimeSection = sections.find(s => s.id === 'crime');
   const chartData = sections.find(s => s.id === 'chartData');
 
@@ -99,6 +100,77 @@ export default function Market() {
               </motion.div>
             ))}
           </div>
+        </section>
+
+        {/* Cost of Failure Section */}
+        <section>
+          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl font-bold text-white mb-3">{costSection.title}</motion.h2>
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-slate-400 mb-8 max-w-3xl leading-relaxed">{costSection.narrative}</motion.p>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {costSection.stats.map((s, i) => <StatCard key={i} {...s} />)}
+          </div>
+
+          {/* Shipping Baseline */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {costSection.shippingBaseline.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="bg-navy-800 border border-white/10 rounded-xl p-5"
+              >
+                <span className="text-2xl">{item.icon}</span>
+                <div className="text-white font-bold text-lg mt-2">{item.value}</div>
+                <div className="text-slate-300 text-sm font-medium mt-0.5">{item.label}</div>
+                <div className="text-slate-500 text-xs mt-1">{item.note}</div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Returns + WISMO callouts */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-orange-950/30 border border-orange-500/20 rounded-xl p-6"
+            >
+              <h4 className="text-orange-400 font-semibold text-sm uppercase tracking-wider mb-3">Returns Cost Reality</h4>
+              <div className="text-4xl font-black text-orange-400 mb-2">{costSection.returnsCosts.perItem}</div>
+              <p className="text-slate-300 text-sm mb-3">{costSection.returnsCosts.perItemNote}</p>
+              <ul className="space-y-2">
+                <li className="text-slate-400 text-sm flex gap-2"><span className="text-orange-400 flex-shrink-0">•</span>{costSection.returnsCosts.revenueImpact}</li>
+                <li className="text-slate-400 text-sm flex gap-2"><span className="text-orange-400 flex-shrink-0">•</span>{costSection.returnsCosts.retailerResponse}</li>
+                <li className="text-slate-400 text-sm flex gap-2"><span className="text-orange-400 flex-shrink-0">•</span>{costSection.returnsCosts.global}</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-sky-950/30 border border-sky-500/20 rounded-xl p-6"
+            >
+              <h4 className="text-sky-400 font-semibold text-sm uppercase tracking-wider mb-3">The WISMO Problem</h4>
+              <div className="text-4xl font-black text-sky-400 mb-2">{costSection.wismoCallout.stat}</div>
+              <p className="text-white font-semibold text-sm mb-2">{costSection.wismoCallout.label}</p>
+              <p className="text-slate-400 text-sm">{costSection.wismoCallout.detail}</p>
+            </motion.div>
+          </div>
+
+          {/* LTV callout */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-slate-300 text-sm leading-relaxed italic"
+          >
+            💡 {costSection.ltvCallout}
+          </motion.div>
         </section>
 
         {/* Crime Section */}

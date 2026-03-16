@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 const navLinks = [
   { path: '/', label: 'Overview' },
   { path: '/market', label: 'Market' },
+  { path: '/problems', label: 'Problems' },
   { path: '/technology', label: 'Technology' },
   { path: '/competitors', label: 'Competitors' },
   { path: '/recommendations', label: 'Recommendations' },

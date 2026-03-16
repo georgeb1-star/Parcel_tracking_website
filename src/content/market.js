@@ -40,6 +40,36 @@ export const marketContent = {
       narrative: "Retailers aren't just asking for faster delivery — they're demanding operational intelligence. The carriers who can provide real-time data, automated exception management, and seamless system integration will earn the long-term contracts. Those who can't will be replaced.",
     },
     {
+      id: "cost-of-failure",
+      title: "The Cost of Getting It Wrong",
+      stats: [
+        { value: "£656B", label: "Global returns cost to retailers (2024)", color: "red" },
+        { value: "35%", label: "Of sales revenue consumed by returns in some e-commerce segments", color: "orange" },
+        { value: "76%", label: "Of UK's top 100 retailers now charge customers for returns", color: "yellow" },
+        { value: "21%", label: "Of all support conversations are WISMO queries", color: "orange" },
+      ],
+      shippingBaseline: [
+        { icon: "📬", label: "Standard domestic parcel", value: "From £1.50", note: "Royal Mail business rate" },
+        { icon: "⚖️", label: "5kg parcel (booked online)", value: "~£2.62", note: "Average online booking rate" },
+        { icon: "🗺️", label: "Domestic cost per mile", value: "~£0.70/mile", note: "Range: £0.50–£1.00/mile" },
+        { icon: "🌍", label: "International cost per mile", value: "£0.60–£1.20/mile", note: "Varies by destination and service" },
+      ],
+      returnsCosts: {
+        perItem: "$40.75",
+        perItemNote: "Average returns processing cost per item (labour, inspection, repackaging, inventory)",
+        revenueImpact: "Up to 35% of sales revenue consumed by returns in high-return e-commerce categories",
+        retailerResponse: "76% of UK's top 100 retailers now charge customers for returns — a direct response to unsustainable processing costs",
+        global: "~£656 billion ($890 billion) — estimated global cost of returns to retailers in 2024",
+      },
+      wismoCallout: {
+        stat: "21%",
+        label: "Of all customer support conversations are WISMO — 'Where Is My Order?'",
+        detail: "Each WISMO contact consumes customer service capacity and budget that could be reinvested in growth. At scale, this single failure mode costs businesses millions annually.",
+      },
+      ltvCallout: "One poor delivery experience can cause a customer to switch permanently — lost lifetime value, negative reviews, and increased acquisition costs compound over time. The true cost of a failed delivery is rarely visible on the day it happens.",
+      narrative: "The economics of shipping failure are stark. Every failed delivery, return, or support escalation carries a measurable cost — and those costs compound at scale. Retailers who cannot demonstrate delivery reliability are increasingly absorbing the financial consequences directly, while customers vote with their wallets.",
+    },
+    {
       id: "crime",
       title: "The Hidden Crisis: Package Theft",
       stats: [

@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const badgeStyles = {
   green: 'bg-emerald-500/20 text-emerald-400 border-emerald-400/30',
@@ -17,13 +17,14 @@ const riskColors = {
 export default function RecommendationCard({ rec, index = 0 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
+  const [stepsOpen, setStepsOpen] = useState(false);
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       className="bg-navy-800 border border-white/10 rounded-2xl overflow-hidden"
       style={{ borderTop: `3px solid ${rec.color}` }}
     >
@@ -48,10 +49,31 @@ export default function RecommendationCard({ rec, index = 0 }) {
         <p className="text-slate-300 text-sm leading-relaxed mb-5">{rec.description}</p>
 
         {/* Rationale */}
-        <div className="bg-white/5 rounded-xl p-4 mb-5">
+        <div className="bg-white/5 rounded-xl p-4 mb-4">
           <h4 className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Strategic Rationale</h4>
           <p className="text-slate-300 text-sm leading-relaxed">{rec.strategic_rationale}</p>
         </div>
+
+        {/* Competitive Edge */}
+        {rec.competitive_edge && (
+          <div className="rounded-xl p-4 mb-4 border" style={{ backgroundColor: `${rec.color}10`, borderColor: `${rec.color}30` }}>
+            <h4 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: rec.color }}>
+              Competitive Edge vs Royal Mail &amp; Detrack
+            </h4>
+            <p className="text-slate-300 text-sm leading-relaxed">{rec.competitive_edge}</p>
+          </div>
+        )}
+
+        {/* ROI Estimate */}
+        {rec.roi_estimate && (
+          <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 mb-5 flex gap-3 items-start">
+            <span className="text-emerald-400 text-lg flex-shrink-0">£</span>
+            <div>
+              <h4 className="text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">ROI Estimate</h4>
+              <p className="text-slate-300 text-sm leading-relaxed">{rec.roi_estimate}</p>
+            </div>
+          </div>
+        )}
 
         {/* Pros & Cons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
@@ -79,6 +101,52 @@ export default function RecommendationCard({ rec, index = 0 }) {
           </div>
         </div>
 
+        {/* Implementation Steps — collapsible */}
+        {rec.implementation_steps && (
+          <div className="mb-5">
+            <button
+              onClick={() => setStepsOpen(!stepsOpen)}
+              className="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors rounded-xl px-4 py-3 text-left"
+            >
+              <h4 className="text-slate-300 text-xs font-semibold uppercase tracking-wider">
+                Implementation Steps ({rec.implementation_steps.length})
+              </h4>
+              <motion.span
+                animate={{ rotate: stepsOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-slate-400 text-sm"
+              >
+                ▾
+              </motion.span>
+            </button>
+            <AnimatePresence>
+              {stepsOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="overflow-hidden"
+                >
+                  <ol className="mt-3 space-y-2 pl-1">
+                    {rec.implementation_steps.map((step, i) => (
+                      <li key={i} className="flex gap-3 text-sm">
+                        <span
+                          className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5"
+                          style={{ backgroundColor: rec.color }}
+                        >
+                          {i + 1}
+                        </span>
+                        <span className="text-slate-300 leading-relaxed">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+
         {/* Meta */}
         <div className="grid grid-cols-3 gap-3 border-t border-white/10 pt-5">
           {[
@@ -96,12 +164,20 @@ export default function RecommendationCard({ rec, index = 0 }) {
         {/* KPIs */}
         <div className="mt-5 pt-5 border-t border-white/10">
           <h4 className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">Key Performance Indicators</h4>
-          <div className="flex flex-wrap gap-2">
-            {rec.kpis.map((kpi, i) => (
-              <span key={i} className="bg-white/5 text-slate-300 text-xs px-3 py-1.5 rounded-full border border-white/10">
-                {kpi}
-              </span>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {rec.kpis.map((kpi, i) => {
+              const isObject = typeof kpi === 'object';
+              return (
+                <div key={i} className="bg-white/5 rounded-lg px-3 py-2.5 border border-white/5 flex items-center justify-between gap-2">
+                  <span className="text-slate-400 text-xs">{isObject ? kpi.label : kpi}</span>
+                  {isObject && (
+                    <span className="text-xs font-semibold whitespace-nowrap" style={{ color: rec.color }}>
+                      {kpi.target}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

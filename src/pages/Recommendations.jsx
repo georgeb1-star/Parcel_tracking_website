@@ -3,10 +3,11 @@ import RecommendationCard from '../components/RecommendationCard';
 import { recommendationsContent } from '../content/recommendations';
 
 export default function Recommendations() {
-  const { title, subtitle, intro, verdict, recommendations, implementationRoadmap } = recommendationsContent;
+  const { title, subtitle, intro, summaryStats, verdict, recommendations, decisionMatrix, implementationRoadmap } = recommendationsContent;
 
   return (
     <div className="min-h-screen">
+      {/* Hero */}
       <div className="pt-24 pb-16 px-4 border-b border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-emerald-400 text-sm font-semibold uppercase tracking-wider mb-3">Strategic Output</motion.p>
@@ -17,6 +18,22 @@ export default function Recommendations() {
       </div>
 
       <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
+
+        {/* Summary Stats Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+        >
+          {summaryStats.map((stat, i) => (
+            <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+              <div className="text-2xl font-black text-white mb-1">{stat.value}</div>
+              <div className="text-slate-400 text-xs uppercase tracking-wider">{stat.label}</div>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Verdict Banner */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
@@ -39,6 +56,56 @@ export default function Recommendations() {
             <RecommendationCard key={rec.id} rec={rec} index={i} />
           ))}
         </div>
+
+        {/* Decision Matrix */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-navy-800 border border-white/10 rounded-2xl p-8"
+        >
+          <h2 className="text-3xl font-bold text-white mb-2">{decisionMatrix.title}</h2>
+          <p className="text-slate-400 text-sm mb-8">{decisionMatrix.subtitle}</p>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left text-slate-400 text-xs uppercase tracking-wider pb-3 pr-4 font-medium">Recommendation</th>
+                  {decisionMatrix.criteria.map((c) => (
+                    <th key={c} className="text-center text-slate-400 text-xs uppercase tracking-wider pb-3 px-2 font-medium min-w-[90px]">{c}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {decisionMatrix.rows.map((row) => (
+                  <tr key={row.id} className="hover:bg-white/3 transition-colors">
+                    <td className="py-3 pr-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: row.color }} />
+                        <span className="text-white font-medium text-sm">{row.label}</span>
+                      </div>
+                    </td>
+                    {row.scores.map((score, i) => (
+                      <td key={i} className="py-3 px-2 text-center">
+                        <div className="flex items-center justify-center gap-0.5">
+                          {[1, 2, 3, 4, 5].map((dot) => (
+                            <div
+                              key={dot}
+                              className="w-2 h-2 rounded-full transition-colors"
+                              style={{ backgroundColor: dot <= score ? row.color : 'rgba(255,255,255,0.1)' }}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-slate-500 text-xs mt-1 block">{score}/5</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </motion.section>
 
         {/* Implementation Roadmap */}
         <motion.section
@@ -87,6 +154,7 @@ export default function Recommendations() {
             </div>
           </div>
         </motion.section>
+
       </div>
     </div>
   );

@@ -294,8 +294,6 @@ export const recommendationsContent = {
         { label: "Customer satisfaction (tracking)", target: "> 4.6 / 5", unit: "score" },
       ],
     },
-  ],
-
     {
       id: "crowd-bluetooth",
       rank: 7,

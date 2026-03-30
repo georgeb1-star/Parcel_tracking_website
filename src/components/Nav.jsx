@@ -9,6 +9,7 @@ const navLinks = [
   { path: '/technology', label: 'Technology' },
   { path: '/competitors', label: 'Competitors' },
   { path: '/recommendations', label: 'Recommendations' },
+  { path: '/gsm-tracker', label: 'GSM Tracker' },
 ];
 
 export default function Nav() {

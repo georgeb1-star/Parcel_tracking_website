@@ -7,6 +7,7 @@ import Technology from './pages/Technology';
 import Competitors from './pages/Competitors';
 import Recommendations from './pages/Recommendations';
 import Problems from './pages/Problems';
+import GsmTracker from './pages/GsmTracker';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/competitors" element={<Competitors />} />
             <Route path="/recommendations" element={<Recommendations />} />
             <Route path="/problems" element={<Problems />} />
+            <Route path="/gsm-tracker" element={<GsmTracker />} />
           </Routes>
         </main>
         <Footer />
